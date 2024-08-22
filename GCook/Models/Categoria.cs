@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GCook.Models;
-
+    
 [Table("Categoria")]
 public class Categoria
 {
@@ -15,4 +15,6 @@ public class Categoria
 
     [StringLength(300)]
     public string Foto { get; set; }
+
+    public bool ExibirHome { get; set; } = false;
 }
