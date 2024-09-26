@@ -8,7 +8,7 @@ dotnet new sln --name GCook
 dotnet sln add GCook\Gcook.csproj
 
 Executar o projeto
-cd .\Pokedex\
+cd .\GCook\
 dotnet run
 dotnet watch run 
 

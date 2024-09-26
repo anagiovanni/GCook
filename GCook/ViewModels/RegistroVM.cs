@@ -24,6 +24,11 @@ namespace GCook.ViewModels
         [Display(Name = "Senha de Acesso", Prompt = "Informe uma Senha para Acesso")]
         [Required(ErrorMessage = "Por favor, informe sua Senha de Acesso")]
         [StringLength(20, MinimumLength = 6, ErrorMessage ="A senha deve possuir no mínimo 6 e no máximo 20 caracteres")]
+        public string Senha { get; set; }
+        
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar Senha de Acesso", Prompt = "Confirme sua Senha de Acesso")]
+        [Compare("Senha", ErrorMessage = "As Senhas não conferem")]
         public string ConfirmacaoSenha { get; set; }
 
         public IFormFile Foto { get; set; }
