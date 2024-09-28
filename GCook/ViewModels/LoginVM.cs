@@ -14,7 +14,7 @@ namespace GCook.ViewModels
         public string Senha { get; set; }
 
         [Display(Name = "Manter conectado")]
-        public bool Lembrar { get; set; }
+        public bool Lembrar { get; set; } = false;
 
         public string UrlRetorno { get; set; }
     }

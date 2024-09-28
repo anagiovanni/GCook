@@ -17,35 +17,55 @@ public class AccountController : Controller
         _logger = logger;
         _usuarioService = usuarioService;
     }
-
-    [HttpGet]
-    public IActionResult Login(string returnUrl)
+[HttpGet]
+public IActionResult Login(string returnUrl)
+{
+    // Verificando se returnUrl é uma URL local válida antes de atribuir
+    LoginVM login = new()
     {
-        LoginVM login = new()
-        {
-            UrlRetorno = returnUrl ?? Url.Content("~/")
-        };
-        return View(login);
-    }
+        UrlRetorno = Url.IsLocalUrl(returnUrl) ? returnUrl : Url.Content("~/")
+    };
+    return View(login);
+}
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Login(LoginVM login)
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Login(LoginVM login)
+{
+    if (ModelState.IsValid)
     {
-        if (ModelState.IsValid)
+        var result = await _usuarioService.LoginUsuario(login);
+        if (result.Succeeded)
         {
-            var result = await _usuarioService.LoginUsuario(login);
-            if (result.Succeeded)
+            // Verificando se UrlRetorno é uma URL local válida antes do redirecionamento
+            if (Url.IsLocalUrl(login.UrlRetorno))
+            {
                 return LocalRedirect(login.UrlRetorno);
-            if (result.IsLockedOut)
-                return RedirectToAction("Lockout");
-            if (result.IsNotAllowed)
-                ModelState.AddModelError(string.Empty, "Sua conta não está confirmada, verifique seu email");
+            }
             else
-                ModelState.AddModelError(string.Empty, "Usuário e/ou Senha Inválidos");
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
-        return View(login);
+
+        if (result.IsLockedOut)
+        {
+            return RedirectToAction("Lockout");
+        }
+
+        if (result.IsNotAllowed)
+        {
+            ModelState.AddModelError(string.Empty, "Sua conta não está confirmada, verifique seu email");
+        }
+        else
+        {
+            ModelState.AddModelError(string.Empty, "Usuário e/ou Senha Inválidos");
+        }
     }
+
+    return View(login);
+}
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]
