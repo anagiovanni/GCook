@@ -19,3 +19,6 @@ Atualizar: dotnet tool update --global dotnet-ef --version 8.0.8
 
 Criar uma migração: dotnet ef migrations add criarBanco
 Aplicar a migração: dotnet ef database update
+
+
+dotnet-aspnet-codegenerator controller -name CategoriasController -m Categoria -dc AppDbContext -outDir Controllers -l "~/View/Shared/_LayoutAdmin.cshtml"
