@@ -21,3 +21,5 @@ Aplicar a migração: dotnet ef database update
 
 
 dotnet-aspnet-codegenerator controller -name CategoriasController -m Categoria -dc AppDbContext -outDir Controllers -l "~/View/Shared/_LayoutAdmin.cshtml"
+
+dotnet-aspnet-codegenerator controller -name ReceitasController -m Receita -dc AppDbContext -outDir Controllers -l "~/View/Shared/_LayoutAdmin.cshtml"
