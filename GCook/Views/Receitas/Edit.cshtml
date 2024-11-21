@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Edit</h1>
+<h1 class="mb-3">Editar</h1>
 
 <h4>Receita</h4>
 <hr />
@@ -34,14 +34,15 @@
                 <input asp-for="Rendimento" class="form-control" />
                 <span asp-validation-for="Rendimento" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+           <div class="mb-3">
                 <label asp-for="Dificuldade" class="control-label"></label>
-                <select asp-for="Dificuldade" class="form-control"></select>
+                <select asp-for="Dificuldade" class="form-select" asp-items="Html.GetEnumSelectList<Dificuldade>()"></select>
                 <span asp-validation-for="Dificuldade" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
+                <img id='Preview'>
+                <input name="Foto" type="file" class="form-control" accept=".jpg,.jpeg,.png,.gif" />
                 <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -55,13 +56,9 @@
                 <span asp-validation-for="CategoriaId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger ms-2">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

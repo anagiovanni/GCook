@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Criar</h1>
 
 <h4>Receitas</h4>
 <hr />
@@ -35,7 +35,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="Dificuldade" class="control-label"></label>
-                <select asp-for="Dificuldade" class="form-control"></select>
+                <select asp-for="Dificuldade" class="form-select" asp-items="Html.GetEnumSelectList<Dificuldade>()"></select>
                 <span asp-validation-for="Dificuldade" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -53,14 +53,12 @@
                 <label asp-for="CategoriaId" class="control-label"></label>
                 <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
             </div>
-            <div class="mb-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
+           <div class="mb-3">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger ms-2">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
